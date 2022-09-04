@@ -1,1 +1,1 @@
-# cpsAutoClicker
+# ClickPerSecond
