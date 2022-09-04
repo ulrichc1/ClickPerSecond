@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <title> CPS </title>
+   <meta charset="UTF-8">
+   <link rel="stylesheet" type="text/css" href="style.css">
+   <link rel="icon" type="image/x-icon" href="logo.ico">
+   <script type="text/javascript">
+      var timing =10;
+   </script>
+   <script type="text/javascript">
+      function startTime(){
+      var today=new Date() ;
+      var h=today.getHours();
+      var m=today.getMinutes() ;
+      var s=today.getSeconds();
+      document.getElementById('txt').innerHTML=h+":"+m+":"+s;
+      t=setTimeout('startTime()',500); }
+       </script> 
+</head>
+<body onload="startTime()">
+   <div class="bg-image">
+   </div>
+   <div class="bg-text">
+   <div id="header"> 
+      <img src="logo.png" alt="CPS" title="CPS">
+   </div>
+   <div class="timers" id="timers">
+      <a href="#"><img src="timer1.png" id="timer1"> </a>
+      <script type="text/javascript"> 
+         const t1 = document.getElementById('timer1');
+         t1.addEventListener('click',function(){
+            timing = 1;
+         });
+         
+      </script>
+     <a href="#"> <img src="timer5.png" id = "timer5"> </a>
+      <script type="text/javascript"> 
+         const t5 = document.getElementById('timer5');
+         t5.addEventListener('click',function(){
+              timing = 5;
+         });
+         
+      </script>
+   </script>
+      <a href="#"><img src="timer10.png" id="timer10"> </a>
+      <script type="text/javascript"> 
+         const t10 = document.getElementById('timer10');
+         t10.addEventListener('click',function(){
+             timing = 10;
+         });
+         
+      </script>
+   </div>
+   <div class="clicker hidden"> 
+   <progress value="0" id="progressbar"> </progress>
+   <p id="TimerDisplay"> </p>
+   </div>
+
+<button id="timerbox"> <p class="start"> START </p>
+</button>
+   <article id="clicks">
+      <button class="hidden" id="link" href="#"></button>
+      <script type="text/javascript">
+      document.getElementById('timerbox').addEventListener('click', function() {
+   timer();})
+
+</script>
+    </article> 
+    <button class="hidden2" id="total_clicks" href="#"></button>
+    <button class="hidden2" id="cps" href="#"> </button>
+    <div id="restart">
+      <img src="restart-icon.png" alt="Restart" id="reload">
+      <script type="text/javascript">
+         const img = document.getElementById("reload");
+         img.addEventListener('click',function(){
+            location.reload();
+         })
+      </script>
+    </div>
+    <div id="counter" class="hidden">
+   </div>
+    <script type="text/javascript" src="timeronclick.js"></script>
+    <script type="text/javascript">
+
+      function timer(){
+        
+      let timeleft = timing;
+      let Clicks = 0;
+      const progress = document.getElementById('progressbar');
+         progress.setAttribute('max', timing);
+   document
+   .getElementById("clicks")
+   .addEventListener("click", function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+     document
+    .getElementById("clicks-count")
+    .innerHTML = (++Clicks) + '';
+   
+    
+   })
+   ;
+
+ 
+      const timer = setInterval(() => {
+            if(timeleft <= 0){
+               clearInterval(timer);
+               const cpss = document.getElementById('cps');
+               const totalclicks = document.getElementById('total_clicks');
+               if (timing == 10){
+               var cps = (Clicks/10);
+               }
+               else if (timing == 5){
+                  var cps = (Clicks/5);
+               }
+               else {
+                  var cps =(Clicks/1);
+               }
+               var hidden2 = document.getElementsByClassName('hidden2');
+               for(i =0;i < hidden2.length ; i++){
+               hidden2[i].style.display = "block";
+               }
+               var hidden3 = document.getElementsByClassName('hidden3');
+               for(i =0;i < hidden3.length ; i++){
+               hidden3[i].style.display = "block";
+               }
+               var hidden = document.getElementsByClassName('hidden');
+               for(i =0;i < hidden.length ; i++){
+               hidden[i].style.display = "none";
+               }
+               cpss.innerHTML = "<p class='score'> CPS : " + cps + "</p>";
+               totalclicks.innerHTML = " <p class='score'> Total Clicks : " + Clicks + "</p>";
+               
+
+            }
+            document.getElementById("progressbar").value = timing-timeleft;
+            
+            // document.getElementById('TimerDisplay').innerHTML='00:'+ timeleft; //
+            timeleft--;
+
+      },1000)};
+   </script>
+   </div>
+</div>
+</body>
+</html>
